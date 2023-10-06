@@ -1,13 +1,23 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Nav = () => {
   return (
-    <nav className="bg-gray-500" >
-      <ul className="flex justify-around text-xl gap-6 p-8 font-semibold text-slate-50 ">
-        <li> <Link to="/">Products</Link> </li>
-        <li> <Link to="/cart">Cart ({Math.floor(Math.random()*10)})</Link> </li>
-      </ul>
+    <nav className="bg-white dark:bg-gray-800 py-4">
+        <div className="flex justify-center items-baseline space-x-4">
+          <NavLink
+            to="/product"
+            className="text-gray-300  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-xl font-medium"
+          >
+            Products
+          </NavLink>
+          <NavLink
+            to="/cart"
+            className="text-gray-300  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-xl font-medium"
+          >
+            Cart
+          </NavLink>
+      </div>
     </nav>
   );
 };
