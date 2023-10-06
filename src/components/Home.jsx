@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
+import CartContext from "../context/CartContext";
 
 const Home = () => {
-  const URL = "https://fakestoreapi.com/products";
+  const URL = "https://fakestoreapi.com/products"
   const [product, setproduct] = useState([]);
+  const {addToCart} = useContext(CartContext);  
 
   const fetchproducts = async () => {
     let response = await fetch(URL);
@@ -18,7 +20,7 @@ const Home = () => {
       <div className="container p-8 m-auto">
         <div className="flex justify-between flex-wrap gap-4 ">
           {product.map((product)=>(
-            <div key={product.id} className="bg-white flex-grow shadow-md rounded-lg w-80 dark:bg-gray-800 dark:border-gray-700">
+            <div key={product.id} className="bg-white flex-grow shadow-md rounded-lg w-80 dark:bg-gray-600 dark:border-gray-700">
               <div className="h-[300px] w-full">
               <img 
                 className="object-contain  p-4 h-full w-full"
@@ -36,12 +38,9 @@ const Home = () => {
                 <span className="text-3xl font-bold text-gray-900 dark:text-white">
                   ${product.price}
                 </span>
-                <a
-                  href="#"
-                  className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-                >
+                <button onClick={()=>addToCart(product.id,product.title,product.price,product.image)} className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
                   Add to cart
-                </a>
+                </button>
               </div>
             </div>
           </div>

@@ -1,15 +1,23 @@
-import React from "react";
+import React, { useContext,useState } from "react";
 import { Link } from "react-router-dom";
+import CartContext from "../context/CartContext";
 
 const Cart = () => {
+  const [totalPrice, setTotalPrice] = useState("")
+  const {cartProduct, setcartProduct} = useContext(CartContext)
+
+  const handleRemoveClick = (deleteid) =>{
+    console.log(cartProduct);
+    setcartProduct((newCart)=> newCart.filter((cartProduct)=>cartProduct.id !==deleteid))
+  }
+
   return (
     <>
-      <div className="container p-4 mx-auto mt-10">
+      <div className="container px-6 mx-auto mt-4">
         <div className="flex shadow-md my-10">
           <div className="w-3/4 bg-white px-10 py-10">
             <div className="flex justify-between border-b pb-8">
               <h1 className="font-semibold text-2xl">Shopping Cart</h1>
-              <h2 className="font-semibold text-2xl">3 Items</h2>
             </div>
             <div className="flex mt-10 mb-5">
               <h3 className="font-semibold text-gray-600 text-xs uppercase w-2/5">
@@ -25,24 +33,24 @@ const Cart = () => {
                 Total
               </h3>
             </div>
-            <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
+            {cartProduct.map((cardproduct)=>(
+              <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
               <div className="flex w-2/5">
                 <div className="w-20">
                   <img
                     className="h-24"
-                    src="https://drive.google.com/uc?id=18KkAVkGFvaGNqPy2DIvTqmUH_nk39o3z"
+                    src={cardproduct.image}
                     alt=""
                   />
                 </div>
                 <div className="flex flex-col justify-between ml-4 flex-grow">
-                  <span className="font-bold text-sm">Iphone 6S</span>
-                  <span className="text-red-500 text-xs">Apple</span>
-                  <a
-                    href="#"
-                    className="font-semibold hover:text-red-500 text-gray-500 text-xs"
+                  <span className="font-bold text-sm"></span>
+                  <span className="text-gray-900 text-sm font-medium ">{cardproduct.title?cardproduct.title:"No Products"}</span>
+                  <button onClick={()=>handleRemoveClick(cardproduct.id)}
+                    className="font-semibold bg-red-500 p-2 w-3/12 rounded-lg hover:bg-red-600 text-white text-xs"
                   >
                     Remove
-                  </a>
+                  </button >
                 </div>
               </div>
               <div className="flex justify-center w-1/5">
@@ -57,6 +65,7 @@ const Cart = () => {
                   className="mx-2 border text-center w-8"
                   type="text"
                   value="1"
+                  min={1}
                 />
 
                 <svg
@@ -67,12 +76,14 @@ const Cart = () => {
                 </svg>
               </div>
               <span className="text-center w-1/5 font-semibold text-sm">
-                $400.00
+                ${cardproduct.price}
               </span>
               <span className="text-center w-1/5 font-semibold text-sm">
-                $400.00
+              ${cardproduct.price}
               </span>
             </div>
+            ))}
+            
 
             <Link
               to="/"
@@ -93,14 +104,16 @@ const Cart = () => {
               Order Summary
             </h1>
             <div className="flex justify-between mt-10 mb-5">
-              <span className="font-semibold text-sm uppercase">Items 3</span>
-              <span className="font-semibold text-sm">590$</span>
+              <span className="font-semibold text-sm uppercase">Total Items</span>
+              <span className="font-semibold text-sm">{cartProduct.length}</span>
             </div>
 
             <div className="border-t mt-8">
               <div className="flex font-semibold justify-between py-6 text-sm uppercase">
                 <span>Total cost</span>
-                <span>$600</span>
+                <span>
+                  {totalPrice}
+                  </span>
               </div>
               <button className="bg-indigo-500 font-semibold hover:bg-indigo-600 py-3 text-sm text-white uppercase w-full">
                 Checkout
