@@ -1,24 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link} from "react-router-dom";
 import CartContext from "../context/CartContext";
 
 const Cart = () => {
   const [totalPrice, setTotalPrice] = useState([]);
   const {cartProduct, setcartProduct } = useContext(CartContext);
-
-  const handleRemoveClick = (deleteid) => {
-    setcartProduct((newCart) =>
-      newCart.filter((cartProduct) => cartProduct.id !== deleteid)
-    );
-  };
+  console.log(cartProduct)
 
 
   useEffect(() => {
     const prices = cartProduct.map(p=>p.price)
-    console.log(prices)
     const totalPrice = prices.reduce((acc, curr) => acc + curr, 0);
     setTotalPrice(totalPrice);
-  }, [cartProduct]);
+  }, [totalPrice]);
 
 
   return (
