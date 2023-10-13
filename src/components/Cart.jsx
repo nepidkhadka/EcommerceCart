@@ -4,16 +4,13 @@ import CartContext from "../context/CartContext";
 
 const Cart = () => {
   const [totalPrice, setTotalPrice] = useState([]);
-  const {cartProduct, setcartProduct } = useContext(CartContext);
-  console.log(cartProduct)
-
+  const {cartProduct, removeFromCart} = useContext(CartContext);
 
   useEffect(() => {
     const prices = cartProduct.map(p=>p.price)
     const totalPrice = prices.reduce((acc, curr) => acc + curr, 0);
     setTotalPrice(totalPrice);
-  }, [totalPrice]);
-
+  }, [cartProduct]);
 
   return (
     <>
@@ -55,7 +52,7 @@ const Cart = () => {
                       {cardproduct.title ? cardproduct.title : "No Products"}
                     </span>
                     <button
-                      onClick={() => handleRemoveClick(cardproduct.id)}
+                      onClick={() => removeFromCart(cardproduct.id)}
                       className="font-semibold bg-red-500 p-2 w-3/12 rounded-lg hover:bg-red-600 text-white text-xs"
                     >
                       Remove

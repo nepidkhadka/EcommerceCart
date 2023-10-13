@@ -2,7 +2,7 @@ import React from "react";
 import Nav from "./components/Nav";
 import Home from "./components/Home";
 import Cart from "./components/Cart";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {Route, Routes } from "react-router-dom";
 import { CartProvider } from "./context/CartContext";
 
 const App = () => {
