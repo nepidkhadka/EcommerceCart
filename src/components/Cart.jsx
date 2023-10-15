@@ -15,8 +15,8 @@ const Cart = () => {
   return (
     <>
       <div className="container px-6 mx-auto mt-4">
-        <div className="flex shadow-md my-10">
-          <div className="w-3/4 bg-white px-10 py-10">
+        <div className="flex shadow-md my-10 flex-col md:flex-row">
+          <div className="md:w-3/4 bg-white px-10 py-10 w-full">
             <div className="flex justify-between border-b pb-8">
               <h1 className="font-semibold text-2xl">Shopping Cart</h1>
             </div>
@@ -41,19 +41,19 @@ const Cart = () => {
               )}
             </div>
             {cartProduct.map((cardproduct) => (
-              <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5">
-                <div className="flex w-2/5">
+              <div className="flex items-center hover:bg-gray-100 -mx-8 px-6 py-5 flex-wrap">
+                <div className="flex flex-col sm:flex-row w-2/5">
                   <div className="w-20">
                     <img className="h-24" src={cardproduct.image} alt="" />
                   </div>
-                  <div className="flex flex-col justify-between ml-4 flex-grow">
+                  <div className="flex flex-col justify-between sm:ml-4 flex-grow">
                     <span className="font-bold text-sm"></span>
                     <span className="text-gray-900 text-sm font-medium ">
                       {cardproduct.title ? cardproduct.title : "No Products"}
                     </span>
                     <button
                       onClick={() => removeFromCart(cardproduct.id)}
-                      className="font-semibold bg-red-500 p-2 w-3/12 rounded-lg hover:bg-red-600 text-white text-xs"
+                      className="font-semibold bg-red-500 p-2  max-w-[80px] rounded-lg hover:bg-red-600 text-white text-xs"
                     >
                       Remove
                     </button>
@@ -104,7 +104,7 @@ const Cart = () => {
             </Link>
           </div>
 
-          <div id="summary" className="w-1/4 px-8 py-10">
+          <div id="summary" className="md:w-1/4 px-8 py-10 w-full">
             <h1 className="font-semibold text-2xl border-b pb-8">
               Order Summary
             </h1>
